@@ -1,0 +1,23 @@
+---
+# tasks file for vm-config
+
+- name: update vm
+  yum:
+    update_only: yes
+
+- name: install tools
+  yum:
+    name: '{{ item }}'
+    stat: present
+  with_items:
+    - httpd
+    - net-tools
+
+- name: start services
+  service:
+    name: '{{ item }}'
+    stat: started
+  with_items:
+    - httpd
+
+
