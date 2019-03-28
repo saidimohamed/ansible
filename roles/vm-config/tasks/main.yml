@@ -4,11 +4,13 @@
 - name: update vm
   yum:
     update_only: yes
+  become: true
 
 - name: install tools
   yum:
     name: '{{ item }}'
     state: present
+  become: true
   with_items:
     - httpd
     - net-tools
@@ -17,6 +19,7 @@
   service:
     name: '{{ item }}'
     stat: started
+  become: true
   with_items:
     - httpd
 
